@@ -9,6 +9,10 @@ var h = require('./helpers');
 
 import { browserHistory } from 'react-router'
 
+// Firebase
+var Rebase = require('re-base');
+var base = Rebase.createClass('https://catch-of-the-day-lpj.firebaseio.com/');
+
 /*
   App
 */
@@ -20,6 +24,16 @@ var App = React.createClass({
 			fishes : {},
 			order : {},
 		}
+	},
+
+	// NOTE: use this to initialize with server-side info
+	// also, you can get more info from react docs
+	// https://facebook.github.io/react/docs/component-specs.html
+	componentDidMount : function() {
+		base.syncState(this.props.params.storeId + '/fishes', {
+		context : this,
+		state : 'fishes'
+		});
 	},
 
 	addToOrder : function(key) {

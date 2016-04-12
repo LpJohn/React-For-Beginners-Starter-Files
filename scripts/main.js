@@ -21,6 +21,9 @@ var Catalyst = require('react-catalyst');
 
 import NotFound from './components/NotFound';
 import StorePicker from './components/StorePicker';
+import Header from './components/Header';
+import Fish from './components/Fish';
+import AddFishForm from './components/AddFishForm';
 
 /*
   App
@@ -113,92 +116,6 @@ var App = React.createClass({
         <Inventory addFish={this.addFish} loadSamples={this.loadSamples} fishes={this.state.fishes} linkState={this.linkState} removeFish={this.removeFish} />
       </div>
     )
-  }
-});
-
-/*
-	Fish
-	<Fish />
-*/
-var Fish = React.createClass({
-	onButtonClick : function() {
-		var key = this.props.index;
-		this.props.addToOrder(key);
-	},
-
-	render : function() {
-		var details = this.props.details;
-		var isAvailable = (details.status === 'available' ? true : false);
-		var buttonText = (isAvailable ? 'Add To Order' : 'Sold Out!');
-		return (
-			<li className="menu-fish">
-				<img src={details.image} alt={details.name} />
-				<h3 className="fish-name">
-					{details.name}
-					<span className="price">{h.formatPrice(details.price)}</span>
-				</h3>
-				<p>{details.desc}</p>
-				<button disabled={!isAvailable} onClick={this.onButtonClick}>{buttonText}</button>
-			</li>
-		)
-	}
-});
-
-/*
-  Add Fish Form
-  <AddFishForm />
-*/
-var AddFishForm = React.createClass({
-	createFish : function(event) {
-		// 1. Stop the form from submitting
-		event.preventDefault();
-
-		// 2. Take the data from the form and create an object
-		var fish = {
-			name : this.refs.name.value,
-			price : this.refs.price.value,
-			status : this.refs.status.value,
-			desc : this.refs.desc.value,
-			image : this.refs.image.value,
-		}
-
-		// 3. Add the fish to the App State
-		this.props.addFish(fish);
-		this.refs.fishForm.reset();
-
-	},
-  render : function() {
-    return (
-	<form className="fish-edit" ref="fishForm" onSubmit={this.createFish}>
-		<input type="text" ref="name" placeholder="Fish Name" />
-		<input type="text" ref="price" placeholder="Fish Price" />
-		<select ref="status">
-			<option value="available">Fresh!</option>
-			<option value="unavailable">Sold Out!</option>
-		</select>
-		<textarea type="text" ref="desc" placeholder="Desc" />
-		<input type="text" ref="image" placeholder="URL to Image" />
-		<button type="submit">+ Add Item</button>
-	</form>
-    )
-  }
-});
-
-/*
-  Header
-  <Header/>
-*/
-var Header = React.createClass({
-  render : function() {
-    return (
-      <header>
-      	<h1>Header</h1>
-	<h3>{this.props.tagline}</h3>
-      </header>
-    )
-  },
-  propTypes : {
-	tagline : React.PropTypes.string.isRequired
   }
 });
 

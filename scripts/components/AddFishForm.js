@@ -4,7 +4,6 @@
 */
 
 import React from 'react';
-// import h from '../helpers';
 
 var AddFishForm = React.createClass({
 	createFish : function(event) {

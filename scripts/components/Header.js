@@ -5,19 +5,20 @@
 
 import React from 'react';
 
-var Header = React.createClass({
-  render : function() {
+class Header extends React.Component{
+  render () {
     return (
       <header>
       	<h1>Fish Market</h1>
 	<h3>{this.props.tagline}</h3>
       </header>
     )
-  },
-  propTypes : {
+  }
+}
+
+  Header.propTypes = {
 	tagline : React.PropTypes.string.isRequired
   }
-});
 
 export default Header;
 

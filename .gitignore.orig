@@ -1,0 +1,9 @@
+<<<<<<< HEAD
+node_modules/*
+build/*
+*.swp
+=======
+node_modules/
+*.zip
+.DS_Store
+>>>>>>> d625acd3e460fc58aa0899588681992ae8115ecc
